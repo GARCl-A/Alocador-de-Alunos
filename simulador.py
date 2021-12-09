@@ -4,8 +4,8 @@ import pandas as pd #Biblioteca pra lidar com planilhas
 
 #Objeto do aluno com os atributos necessários
 class Aluno():
-    def __init__(self,nome,primeira_op,segunda_op,terceira_op,primeira_opcao_corpo1,segunda_opcao_corpo1,terceira_opcao_corpo1,primeira_opcao_corpo2,segunda_opcao_corpo2,terceira_opcao_corpo2, classificacao):
-        self._nome = nome.strip().capitalize()
+    def __init__(self,numero_nome,primeira_op,segunda_op,terceira_op,primeira_opcao_corpo1,segunda_opcao_corpo1,terceira_opcao_corpo1,primeira_opcao_corpo2,segunda_opcao_corpo2,terceira_opcao_corpo2, classificacao):
+        self._numero_nome = numero_nome.strip().capitalize()
         self._primeira_op = primeira_op.strip().capitalize()
         self._segunda_op = segunda_op.strip().capitalize()
         self._terceira_op = terceira_op.strip().capitalize()
@@ -21,7 +21,7 @@ class Aluno():
 #As colunas já estão na ordem correta        
 def cria_objetos(formulario, objetos_alunos):
     for linha in formulario.iterrows():
-        nome = linha[1][1]
+        numero_nome = linha[1][1]
         primeira_op = linha[1][2]
         segunda_op = linha[1][3]
         terceira_op = linha[1][4]
@@ -32,7 +32,7 @@ def cria_objetos(formulario, objetos_alunos):
         segunda_opcao_corpo2 = linha[1][9]
         terceira_opcao_corpo2 = linha[1][10]
         classificacao = linha[1][11]
-        aluno = Aluno(nome,primeira_op,segunda_op,terceira_op,primeira_opcao_corpo1,segunda_opcao_corpo1,terceira_opcao_corpo1,primeira_opcao_corpo2,segunda_opcao_corpo2,terceira_opcao_corpo2, classificacao)
+        aluno = Aluno(numero_nome,primeira_op,segunda_op,terceira_op,primeira_opcao_corpo1,segunda_opcao_corpo1,terceira_opcao_corpo1,primeira_opcao_corpo2,segunda_opcao_corpo2,terceira_opcao_corpo2, classificacao)
         objetos_alunos.append(aluno)
 
 #Criando uma lista de objetos
@@ -58,35 +58,34 @@ for aluno in objetos_alunos:
     #ALOCANDO NA PRIMEIRA OPÇÃO
     if aluno._primeira_op == 'Corpo 1' and len(aprovados_corpo1) < vagas_corpo1:
         aprovados_corpo1.append(aluno)
-        continue
+
     elif aluno._primeira_op == 'Corpo 2' and len(aprovados_corpo2) < vagas_corpo2:
         aprovados_corpo2.append(aluno)
-        continue
+
     elif aluno._primeira_op == 'Corpo 3' and len(aprovados_corpo3) < vagas_corpo3:
         aprovados_corpo3.append(aluno)
-        continue
+
 
     #ALOCANDO NA SEGUNDA OPÇÃO
     elif aluno._segunda_op == 'Corpo 1' and len(aprovados_corpo1) < vagas_corpo1:
         aprovados_corpo1.append(aluno)
-        continue
+
     elif aluno._segunda_op == 'Corpo 2' and len(aprovados_corpo2) < vagas_corpo2:
         aprovados_corpo2.append(aluno)
-        continue
+
     elif aluno._segunda_op == 'Corpo 3' and len(aprovados_corpo3) < vagas_corpo3:
         aprovados_corpo3.append(aluno)
-        continue
+
 
     #ALOCANDO NA TERCEIRA OPÇÃO
     elif aluno._terceira_op == 'Corpo 1' and len(aprovados_corpo1) < vagas_corpo1:
         aprovados_corpo1.append(aluno)
-        continue
+
     elif aluno._terceira_op == 'Corpo 2' and len(aprovados_corpo2) < vagas_corpo2:
         aprovados_corpo2.append(aluno)
-        continue
+
     elif aluno._terceira_op == 'Corpo 3' and len(aprovados_corpo3) < vagas_corpo3:
         aprovados_corpo3.append(aluno)
-        continue
 
     else:   
         excedentes.append(aluno)
@@ -95,14 +94,14 @@ for aluno in objetos_alunos:
 classificacao_parcial_corpo1 = open("classificacao_parcial_corpo1.txt", "a")
 index = 1
 for aluno in aprovados_corpo1:
-    classificacao_parcial_corpo1.writelines(f"Aluno:{aluno._nome} - Pos.:{index}\n")
+    classificacao_parcial_corpo1.writelines(f"Aluno:{aluno._numero_nome} - Pos.:{index}\n")
     index += 1
 classificacao_parcial_corpo1.close()
 
 classificacao_parcial_corpo2 = open("classificacao_parcial_corpo2.txt", "a")
 index = 1
 for aluno in aprovados_corpo2:
-    classificacao_parcial_corpo2.writelines(f"Aluno:{aluno._nome} - Pos.:{index}\n")
+    classificacao_parcial_corpo2.writelines(f"Aluno:{aluno._numero_nome} - Pos.:{index}\n")
     index += 1
 classificacao_parcial_corpo2.close()
 
@@ -110,7 +109,7 @@ classificacao_parcial_corpo2.close()
 classificacao_final_corpo3 = open("classificacao_final_corpo3.txt", "a")
 index = 1
 for aluno in aprovados_corpo3:
-    classificacao_final_corpo3.writelines(f"Aluno:{aluno._nome} - Pos.:{index}\n")
+    classificacao_final_corpo3.writelines(f"Aluno(Numero - Nome):{aluno._numero_nome} - Pos.:{index}\n")
     index += 1
 classificacao_final_corpo3.close()
 
@@ -194,7 +193,7 @@ for aluno in aprovados_corpo1:
         divisao = "divisao3"
     else:
         divisao = "Erro na simulação"
-    classificacao_final_corpo1.writelines(f"Aluno:{aluno._nome} - Pos no corpo.:{index} - Divis.: {divisao}\n")
+    classificacao_final_corpo1.writelines(f"Aluno(Numero - Nome):{aluno._numero_nome} - Pos no corpo.:{index} - Divis.: {divisao}\n")
     index += 1
 classificacao_final_corpo1.close()
 
@@ -210,7 +209,7 @@ for aluno in aprovados_corpo2:
         divisao = "divisao3"
     else:
         divisao = "Erro na simulação"
-    classificacao_final_corpo2.writelines(f"Aluno:{aluno._nome} - Pos no corpo.:{index} - Divis.: {divisao}\n")
+    classificacao_final_corpo2.writelines(f"Aluno(Numero - Nome):{aluno._numero_nome} - Pos no corpo.:{index} - Divis.: {divisao}\n")
     index += 1
 classificacao_final_corpo2.close()
 
